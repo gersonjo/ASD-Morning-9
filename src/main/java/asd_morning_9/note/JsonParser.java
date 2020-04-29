@@ -47,24 +47,44 @@ public class JsonParser
   }
 
   public void EditNote (int id, String title, Note note)
+{
+  boolean check;
+  for (Note item : notes_)
   {
-    boolean check;
-    for (Note item : notes_)
+    if (item.getTitle().equals(note.getTitle()))
     {
-      if (item.getTitle().equals(note.getTitle()))
-      {
-        //item.setContent(content);
-        //item.setCompleted(completed);
-        //item.setTags(tags);
-        int x;
-        x = item.getId();
-        //notes_.set(x, note);
-        item.setContent(note.getContent());
-        break;
-      }
+      //item.setContent(content);
+      //item.setCompleted(completed);
+      //item.setTags(tags);
+      int x;
+      x = item.getId();
+      //notes_.set(x, note);
+      item.setContent(note.getContent());
+      break;
     }
-    //SaveNotes();
   }
+  //SaveNotes();
+}
+
+public void PinNote (Note note)
+{
+  //boolean check;
+  for (Note item : notes_)
+  {
+    if (item.getTitle().equals(note.getTitle()))
+    {
+     //item.setContent(content);
+     //item.setCompleted(completed);
+     //item.setTags(tags);
+     //int x;
+     //x = item.getId();
+     notes_.set(0, item);
+     //item.setContent(note.getContent());
+     break;
+    }
+  }
+    //SaveNotes();
+}
 
   public void SaveNotes()
   {

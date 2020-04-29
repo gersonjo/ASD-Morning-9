@@ -74,6 +74,24 @@ public class DashboardView extends VerticalLayout
 
     add(edit_note_cont);
 
+
+
+    TextField title_pin = new TextField();
+    title.setLabel("Title");
+    title.setPlaceholder("Search Note to pin...");
+    title.setClassName("newNoteTitle");
+
+    TextArea content_pin = new TextArea("Content");
+    content.getStyle().set("height", "150px");
+    content.setPlaceholder("Rewrite Note ...");
+    content.setClassName("newNoteedit_pin");
+
+    Div pin_note_cont = new Div();
+
+    edit_note_cont.add(title_pin);
+    edit_note_cont.add(content_pin);
+    add(pin_note_cont);
+
     add(new Button("Edit Note", event -> {
 
       parser.EditNote(5,title.getValue(), new Note(5, title.getValue(), content.getValue()));
@@ -84,6 +102,28 @@ public class DashboardView extends VerticalLayout
               Notification.Position.MIDDLE);
       notification.open();
     }));
+
+    add(new Button("Edit Note", event -> {
+
+      parser.EditNote(5,title.getValue(), new Note(5, title.getValue(), content.getValue()));
+      //TextField id = new TextField("id");
+      parser.SaveNotes();
+      Notification notification = new Notification(
+              "Note was edited successfully!", 2000,
+              Notification.Position.MIDDLE);
+      notification.open();
+    }));
+
+    add(new Button("Pin Note", event -> {
+      parser.PinNote(new Note(5, title.getValue(), content.getValue()));
+      parser.SaveNotes();
+      Notification notification = new Notification(
+              "Note was pinned successfully!", 2000,
+              Notification.Position.MIDDLE);
+      notification.open();
+    }));
+
+
 
     add(ui);
 
